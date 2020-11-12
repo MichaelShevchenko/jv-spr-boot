@@ -106,20 +106,36 @@ public class Review {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Review review = (Review) o;
 
-        if (reviewId != review.reviewId) return false;
-        if (helpfulnessNumerator != review.helpfulnessNumerator) return false;
-        if (helpfulnessDenominator != review.helpfulnessDenominator) return false;
-        if (score != review.score) return false;
-        if (productId != null ? !productId.equals(review.productId) : review.productId != null) return false;
-        if (userId != null ? !userId.equals(review.userId) : review.userId != null) return false;
-        if (profileName != null ? !profileName.equals(review.profileName) : review.profileName != null) return false;
-        if (time != null ? !time.equals(review.time) : review.time != null) return false;
-        if (summary != null ? !summary.equals(review.summary) : review.summary != null) return false;
+        if (reviewId != review.reviewId || helpfulnessNumerator != review.helpfulnessNumerator
+                || helpfulnessDenominator != review.helpfulnessDenominator
+                || score != review.score) {
+            return false;
+        }
+        if (productId != null ? !productId.equals(review.productId) : review.productId != null) {
+            return false;
+        }
+        if (userId != null ? !userId.equals(review.userId) : review.userId != null) {
+            return false;
+        }
+        if (profileName != null ? !profileName.equals(review.profileName)
+                : review.profileName != null) {
+            return false;
+        }
+        if (time != null ? !time.equals(review.time) : review.time != null) {
+            return false;
+        }
+        if (summary != null ? !summary.equals(review.summary) : review.summary != null) {
+            return false;
+        }
         return text != null ? text.equals(review.text) : review.text == null;
     }
 
