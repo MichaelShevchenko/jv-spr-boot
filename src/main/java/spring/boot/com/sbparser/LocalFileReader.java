@@ -1,30 +1,31 @@
 package spring.boot.com.sbparser;
 
-import com.opencsv.CSVReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
 
 public class LocalFileReader implements CsvFileReader {
     private static final String[] FILE_HEADER = {"Id", "ProductId", "UserId", "ProfileName",
             "HelpfulnessNumerator", "HelpfulnessDenominator", "Score", "Time", "Summary", "Text"};
-    private final CSVReader reader;
+    private final Reader reader;
 
-    public LocalFileReader(CSVReader reader) {
+    public LocalFileReader(Reader reader) {
         this.reader = reader;
     }
 
     @Override
-    public List<String[]> readReviewsFile() {
-        List<String[]> fileData = new ArrayList<>();
+    public List<CSVRecord> readReviewsFile() {
+        List<CSVRecord> fileData = new ArrayList<>();
         try (reader) {
-            String[] nextRecord;
-            while ((nextRecord = reader.readNext()) != null) {
-                if (Arrays.equals(nextRecord, FILE_HEADER)) {
-                    continue;
-                }
-                fileData.add(nextRecord);
+            Iterable<CSVRecord> records = CSVFormat.DEFAULT
+                    .withHeader(FILE_HEADER)
+                    .withFirstRecordAsHeader()
+                    .parse(reader);
+            for (CSVRecord record : records) {
+                fileData.add(record);
             }
         } catch (IOException e) {
             throw new RuntimeException("Couldn't read a CSV file", e);
