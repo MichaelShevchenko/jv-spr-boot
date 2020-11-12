@@ -103,4 +103,38 @@ public class Review {
                 + ", score=" + score + ", time=" + time + ", summary='" + summary + '\''
                 + ", text='" + text + '\'' + '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Review review = (Review) o;
+
+        if (reviewId != review.reviewId) return false;
+        if (helpfulnessNumerator != review.helpfulnessNumerator) return false;
+        if (helpfulnessDenominator != review.helpfulnessDenominator) return false;
+        if (score != review.score) return false;
+        if (productId != null ? !productId.equals(review.productId) : review.productId != null) return false;
+        if (userId != null ? !userId.equals(review.userId) : review.userId != null) return false;
+        if (profileName != null ? !profileName.equals(review.profileName) : review.profileName != null) return false;
+        if (time != null ? !time.equals(review.time) : review.time != null) return false;
+        if (summary != null ? !summary.equals(review.summary) : review.summary != null) return false;
+        return text != null ? text.equals(review.text) : review.text == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = reviewId;
+        result = 31 * result + (productId != null ? productId.hashCode() : 0);
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (profileName != null ? profileName.hashCode() : 0);
+        result = 31 * result + helpfulnessNumerator;
+        result = 31 * result + helpfulnessDenominator;
+        result = 31 * result + score;
+        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + (summary != null ? summary.hashCode() : 0);
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        return result;
+    }
 }
