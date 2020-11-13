@@ -24,9 +24,7 @@ public class LocalFileReader implements CsvFileReader {
                     .withHeader(FILE_HEADER)
                     .withFirstRecordAsHeader()
                     .parse(reader);
-            for (CSVRecord record : records) {
-                fileData.add(record);
-            }
+            records.forEach(fileData::add);
         } catch (IOException e) {
             throw new RuntimeException("Couldn't read a CSV file", e);
         }

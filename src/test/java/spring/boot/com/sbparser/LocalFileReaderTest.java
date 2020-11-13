@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LocalFileReaderTest {
     private static final String NON_EXISTENT_FILE_NAME = "src/test/resources/tet.csv";
     private static final String APPROPRIATE_DATA_FILE = "src/test/resources/test1.csv";
+    private static final int REVIEWS_QUANTITY = 1;
     private static final String PROPER_DATA = "11,B0001PB9FE,A3HDKO7OW0QNK4,"
             + "Canadian Fan,1,1,5,1107820800,The Best Hot Sauce in the World,\"I don't "
             + "know if it's the cactus or the tequila or just the unique combination of "
@@ -39,6 +40,7 @@ public class LocalFileReaderTest {
         FileReader fileToRead = new FileReader(new File(APPROPRIATE_DATA_FILE));
         CsvFileReader reader = new LocalFileReader(fileToRead);
         List<CSVRecord> result = reader.readReviewsFile();
+        assertEquals(REVIEWS_QUANTITY, result.size());
         for (int i = 0; i < result.size(); i++) {
             assertIterableEquals(reviewToCompare.get(i), result.get(i));
         }

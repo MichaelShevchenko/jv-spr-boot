@@ -1,6 +1,7 @@
 package spring.boot.com.sbparser;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Review {
     private int reviewId;
@@ -106,51 +107,22 @@ public class Review {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
         Review review = (Review) o;
-
-        if (reviewId != review.reviewId || helpfulnessNumerator != review.helpfulnessNumerator
-                || helpfulnessDenominator != review.helpfulnessDenominator
-                || score != review.score) {
-            return false;
-        }
-        if (productId != null ? !productId.equals(review.productId) : review.productId != null) {
-            return false;
-        }
-        if (userId != null ? !userId.equals(review.userId) : review.userId != null) {
-            return false;
-        }
-        if (profileName != null ? !profileName.equals(review.profileName)
-                : review.profileName != null) {
-            return false;
-        }
-        if (time != null ? !time.equals(review.time) : review.time != null) {
-            return false;
-        }
-        if (summary != null ? !summary.equals(review.summary) : review.summary != null) {
-            return false;
-        }
-        return text != null ? text.equals(review.text) : review.text == null;
+        return Objects.equals(this.reviewId, review.reviewId)
+                && Objects.equals(this.productId, review.productId)
+                && Objects.equals(this.userId, review.userId)
+                && Objects.equals(this.profileName, review.profileName)
+                && Objects.equals(this.helpfulnessNumerator, review.helpfulnessNumerator)
+                && Objects.equals(this.helpfulnessDenominator, review.helpfulnessDenominator)
+                && Objects.equals(this.score, review.score)
+                && Objects.equals(this.time, review.time)
+                && Objects.equals(this.summary, review.summary)
+                && Objects.equals(this.text, review.text);
     }
 
     @Override
     public int hashCode() {
-        int result = reviewId;
-        result = 31 * result + (productId != null ? productId.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (profileName != null ? profileName.hashCode() : 0);
-        result = 31 * result + helpfulnessNumerator;
-        result = 31 * result + helpfulnessDenominator;
-        result = 31 * result + score;
-        result = 31 * result + (time != null ? time.hashCode() : 0);
-        result = 31 * result + (summary != null ? summary.hashCode() : 0);
-        result = 31 * result + (text != null ? text.hashCode() : 0);
-        return result;
+        return Objects.hash(reviewId, productId, userId, profileName,
+                helpfulnessNumerator, helpfulnessDenominator, score, time, summary, text);
     }
 }
