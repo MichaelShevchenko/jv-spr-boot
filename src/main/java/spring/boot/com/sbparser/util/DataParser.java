@@ -1,4 +1,4 @@
-package spring.boot.com.sbparser;
+package spring.boot.com.sbparser.util;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.csv.CSVRecord;
+import spring.boot.com.sbparser.dto.ReviewDto;
 
 public class DataParser {
     private static final int REVIEW_ID_INDEX = 0;
@@ -19,10 +20,10 @@ public class DataParser {
     private static final int REVIEW_SUMMARY_INDEX = 8;
     private static final int REVIEW_TEXT_INDEX = 9;
 
-    public List<Review> parseDataToReviews(List<CSVRecord> dataFromFile) {
-        List<Review> result = new ArrayList<>();
+    public List<ReviewDto> parseDataToReviews(List<CSVRecord> dataFromFile) {
+        List<ReviewDto> result = new ArrayList<>();
         for (CSVRecord lineFromFile : dataFromFile) {
-            Review newReview = new Review();
+            ReviewDto newReview = new ReviewDto();
             newReview.setReviewId(Integer.parseInt(lineFromFile.get(REVIEW_ID_INDEX)));
             newReview.setProductId(String.valueOf(lineFromFile.get(REVIEW_PRODUCT_ID_INDEX)));
             newReview.setUserId(String.valueOf(lineFromFile.get(REVIEW_USER_ID_INDEX)));

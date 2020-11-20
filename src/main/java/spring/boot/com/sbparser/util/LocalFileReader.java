@@ -1,4 +1,4 @@
-package spring.boot.com.sbparser;
+package spring.boot.com.sbparser.util;
 
 import java.io.IOException;
 import java.io.Reader;

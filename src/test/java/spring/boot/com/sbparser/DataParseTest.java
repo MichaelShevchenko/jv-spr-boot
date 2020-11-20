@@ -3,6 +3,11 @@ package spring.boot.com.sbparser;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.Test;
 import org.junit.Assert;
+import spring.boot.com.sbparser.dto.ReviewDto;
+import spring.boot.com.sbparser.util.CsvFileReader;
+import spring.boot.com.sbparser.util.DataParser;
+import spring.boot.com.sbparser.util.LocalFileReader;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,7 +21,7 @@ public class DataParseTest {
     private static final String WRONG_FORMAT_DATA_FILE = "src/test/resources/test2.csv";
     private static final String TEST_QUANTITY_DATA_FILE = "src/test/resources/test.csv";
     private static final int REVIEWS_QUANTITY = 34;
-    private static final Review expectedReview = new Review();
+    private static final ReviewDto expectedReview = new ReviewDto();
 
     static {
         expectedReview.setReviewId(11);
@@ -45,7 +50,7 @@ public class DataParseTest {
         CsvFileReader reader = new LocalFileReader(fileToRead);
         List<CSVRecord> dataFromFile = reader.readReviewsFile();
         DataParser parser = new DataParser();
-        List<Review> result = parser.parseDataToReviews(dataFromFile);
+        List<ReviewDto> result = parser.parseDataToReviews(dataFromFile);
         Assert.assertEquals(expectedReview, result.get(0));
     }
 
@@ -64,7 +69,7 @@ public class DataParseTest {
         CsvFileReader reader = new LocalFileReader(fileToRead);
         List<CSVRecord> dataFromFile = reader.readReviewsFile();
         DataParser parser = new DataParser();
-        List<Review> result = parser.parseDataToReviews(dataFromFile);
+        List<ReviewDto> result = parser.parseDataToReviews(dataFromFile);
         Assert.assertEquals(REVIEWS_QUANTITY, result.size());
     }
 }
