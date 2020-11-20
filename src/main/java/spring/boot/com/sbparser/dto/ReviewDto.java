@@ -1,9 +1,9 @@
-package spring.boot.com.sbparser;
+package spring.boot.com.sbparser.dto;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Review {
+public class ReviewDto {
     private int reviewId;
     private String productId;
     private String userId;
@@ -107,7 +107,7 @@ public class Review {
 
     @Override
     public boolean equals(Object o) {
-        Review review = (Review) o;
+        ReviewDto review = (ReviewDto) o;
         return Objects.equals(this.reviewId, review.reviewId)
                 && Objects.equals(this.productId, review.productId)
                 && Objects.equals(this.userId, review.userId)
