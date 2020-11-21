@@ -1,5 +1,9 @@
 package spring.boot.com.sbparser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,8 +15,6 @@ import org.apache.commons.csv.CSVRecord;
 import org.junit.jupiter.api.Test;
 import spring.boot.com.sbparser.util.CsvFileReader;
 import spring.boot.com.sbparser.util.LocalFileReader;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class LocalFileReaderTest {
     private static final String NON_EXISTENT_FILE_NAME = "src/test/resources/tet.csv";
@@ -39,7 +41,8 @@ public class LocalFileReaderTest {
 
     @Test
     public void readProperDataFile() throws IOException {
-        List<CSVRecord> reviewToCompare = CSVParser.parse(PROPER_DATA, CSVFormat.DEFAULT).getRecords();
+        List<CSVRecord> reviewToCompare =
+                CSVParser.parse(PROPER_DATA, CSVFormat.DEFAULT).getRecords();
         FileReader fileToRead = new FileReader(new File(APPROPRIATE_DATA_FILE));
         CsvFileReader reader = new LocalFileReader(fileToRead);
         List<CSVRecord> result = reader.readReviewsFile();
